@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/suley/Desktop/work/SpaceTraveler/app/src/main/res/drawable/background_rectange_line2.xml" value="0.1245" />
         <entry key="..\:/Users/suley/Desktop/work/SpaceTraveler/app/src/main/res/drawable/background_rectangle_line.xml" value="0.124" />
         <entry key="..\:/Users/suley/Desktop/work/SpaceTraveler/app/src/main/res/drawable/background_rectangular_line.xml" value="0.1245" />
         <entry key="..\:/Users/suley/Desktop/work/SpaceTraveler/app/src/main/res/drawable/ic_baseline_star_border_48.xml" value="0.185" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Users/suley/Desktop/work/SpaceTraveler/app/src/main/res/layout/fragment_favorites.xml" value="0.264" />
         <entry key="..\:/Users/suley/Desktop/work/SpaceTraveler/app/src/main/res/layout/fragment_main.xml" value="0.264" />
         <entry key="..\:/Users/suley/Desktop/work/SpaceTraveler/app/src/main/res/layout/layout_favorites_adapter.xml" value="0.176" />
+        <entry key="..\:/Users/suley/Desktop/work/SpaceTraveler/app/src/main/res/layout/layout_planet_adapter.xml" value="0.264" />
       </map>
     </option>
   </component>
