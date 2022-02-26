@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_station"
+        android:icon="@drawable/ic_baseline_airplanemode_active_24"
+        android:menuCategory="secondary"
+        android:title="@string/station" />
+    <item
+        android:id="@+id/nav_favorites"
+        android:icon="@drawable/ic_baseline_star_24"
+        android:menuCategory="secondary"
+        android:title="@string/favorites" />
+</menu>
