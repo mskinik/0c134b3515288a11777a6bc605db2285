@@ -3,6 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="mainFrag"
+            type="com.mustafasuleymankinik.spacetraveler.view.MainFragment" />
+
+        <variable
+            name="mainViewModel"
+            type="com.mustafasuleymankinik.spacetraveler.viewmodel.MainFragmentViewModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -141,10 +152,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_info_holder" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_view" />
+
             <ImageView
                 android:id="@+id/iv_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{()-> mainFrag.leftClick()}"
                 android:src="@drawable/ic_baseline_keyboard_arrow_left_48"
                 app:layout_constraintBottom_toBottomOf="@id/rv_list"
                 app:layout_constraintStart_toStartOf="parent"
@@ -154,19 +176,12 @@
                 android:id="@+id/iv_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{()-> mainFrag.rightClick()}"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_48"
                 app:layout_constraintBottom_toBottomOf="@id/rv_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/rv_list" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_view" />
 
             <TextView
                 android:id="@+id/tv_current_plannet"
