@@ -22,4 +22,7 @@ interface Dao {
 
     @Insert()
     fun addPlanet(planet: Planet):Long
+
+    @Query("SELECT * FROM table_planet WHERE favorite=1 ORDER BY id ASC ")
+    fun getFavoritedList():List<Planet>
 }

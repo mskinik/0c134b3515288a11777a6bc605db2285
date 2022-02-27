@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_items_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -24,8 +25,8 @@
             android:textColor="@color/dark_gray"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/iv_start"
-            app:layout_constraintEnd_toStartOf="@id/iv_start"
+            app:layout_constraintBottom_toBottomOf="@id/iv_star"
+            app:layout_constraintEnd_toStartOf="@id/iv_star"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,10 +44,10 @@
             app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
         <ImageView
-            android:id="@+id/iv_start"
+            android:id="@+id/iv_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_star_border_48"
+            android:src="@drawable/ic_baseline_star_yellow_48"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

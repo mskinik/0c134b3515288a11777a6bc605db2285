@@ -36,7 +36,10 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(MainFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this@MainFragment,
+            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
+        ).get(MainFragmentViewModel::class.java)
         binding.apply {
             mainFrag = this@MainFragment
             mainViewModel = viewModel
@@ -45,8 +48,8 @@ class MainFragment : Fragment() {
             viewModel.planetList.observe(viewLifecycleOwner, Observer {
                 rvList.adapter = PlanetAdapter(it, itemClickTravelCallback = fun(id: Long) {
 
-                }, itemClickFavoriteCallback = fun(favorite: Boolean, id: Long) {
-                    viewModel.updatePlanetFavorite(favorite, id)
+                }, itemClickFavoriteCallback = fun(id: Long, favorite: Boolean) {
+                    viewModel.updatePlanetFavorite(id, favorite)
                 })
             })
 

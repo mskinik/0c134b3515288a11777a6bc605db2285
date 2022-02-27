@@ -14,7 +14,7 @@ import com.mustafasuleymankinik.spacetraveler.model.Planet
 class PlanetAdapter(
     val list: List<Planet>,
     val itemClickTravelCallback: ((Long) -> Unit)?,
-    val itemClickFavoriteCallback: ((Boolean, Long) -> Unit)?
+    val itemClickFavoriteCallback: ((Long, Boolean) -> Unit)?
 ) : RecyclerView.Adapter<PlanetAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanetAdapter.ViewHolder {
@@ -32,7 +32,7 @@ class PlanetAdapter(
                 tvName.text = it
             }
             ivStar.setOnClickListener {
-                itemClickFavoriteCallback?.invoke(item.favorite, item.id)
+                itemClickFavoriteCallback?.invoke(item.id, item.favorite)
             }
             if (item.favorite)
                 ivStar.background =

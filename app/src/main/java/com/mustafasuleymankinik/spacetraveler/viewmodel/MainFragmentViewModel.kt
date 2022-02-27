@@ -44,8 +44,8 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun updatePlanetFavorite(favorite: Boolean, id: Long) {
-        val bak = dao?.updateFavorite(id, !favorite)
+    fun updatePlanetFavorite(id: Long,favorite: Boolean) {
+        dao?.updateFavorite(id, !favorite)
         _planetList.value = dao?.getNoteList()
     }
 }
