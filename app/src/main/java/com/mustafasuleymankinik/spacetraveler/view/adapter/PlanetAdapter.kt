@@ -1,7 +1,10 @@
 package com.mustafasuleymankinik.spacetraveler.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mustafasuleymankinik.spacetraveler.R
@@ -12,11 +15,12 @@ import com.mustafasuleymankinik.spacetraveler.model.Planet
  * Created by mustafasuleymankinik on 26.02.2022.
  */
 class PlanetAdapter(
-    val list: List<Planet>,
+    val list: MutableList<Planet>,
     val itemClickTravelCallback: ((Long) -> Unit)?,
     val itemClickFavoriteCallback: ((Long, Boolean) -> Unit)?
-) : RecyclerView.Adapter<PlanetAdapter.ViewHolder>() {
-
+) : RecyclerView.Adapter<PlanetAdapter.ViewHolder>(), Filterable {
+    var filteredPlanetList: MutableList<Planet> = list
+    var listPlanet: MutableList<Planet> = list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanetAdapter.ViewHolder {
         val binding =
             LayoutPlanetAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,7 +29,7 @@ class PlanetAdapter(
 
     override fun onBindViewHolder(holder: PlanetAdapter.ViewHolder, position: Int) {
         val context = holder.itemView.context
-        val item = list[position]
+        val item = filteredPlanetList[position]
         val binding = holder.binding
         binding.apply {
             item.name?.let {
@@ -51,11 +55,41 @@ class PlanetAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return filteredPlanetList.size
     }
 
     class ViewHolder(val binding: LayoutPlanetAdapterBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence): FilterResults {
+                val searchString: String = constraint.toString().lowercase()
+
+                if (searchString.isEmpty()) {
+                    filteredPlanetList.clear()
+                    filteredPlanetList.addAll(list)
+                } else {
+                    val tempFilteredList = mutableListOf<Planet>()
+                    for (planet: Planet in list) {
+                        if (planet.name?.lowercase()?.contains(searchString) == true) {
+                            tempFilteredList.add(planet)
+                        }
+                    }
+                    filteredPlanetList = tempFilteredList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = filteredPlanetList
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence, results: FilterResults) {
+                filteredPlanetList = results.values as MutableList<Planet>
+                notifyDataSetChanged()
+            }
+        }
 
     }
 }

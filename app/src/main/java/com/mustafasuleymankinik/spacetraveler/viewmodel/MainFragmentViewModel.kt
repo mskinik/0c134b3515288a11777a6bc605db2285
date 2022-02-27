@@ -29,6 +29,7 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
                     t.forEach { planet ->
                         // temporary code line
                         planet.eus = 999.toString()
+                        dao?.addPlanet(planet)
                     }
                     _planetList.value = dao?.getNoteList()
                 }
@@ -44,7 +45,7 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun updatePlanetFavorite(id: Long,favorite: Boolean) {
+    fun updatePlanetFavorite(id: Long, favorite: Boolean) {
         dao?.updateFavorite(id, !favorite)
         _planetList.value = dao?.getNoteList()
     }

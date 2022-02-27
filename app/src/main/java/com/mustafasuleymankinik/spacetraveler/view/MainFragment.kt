@@ -2,16 +2,16 @@ package com.mustafasuleymankinik.spacetraveler.view
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mustafasuleymankinik.spacetraveler.R
 import com.mustafasuleymankinik.spacetraveler.databinding.FragmentMainBinding
+import com.mustafasuleymankinik.spacetraveler.model.Planet
 import com.mustafasuleymankinik.spacetraveler.repo.database.Dao
 import com.mustafasuleymankinik.spacetraveler.view.adapter.PlanetAdapter
 import com.mustafasuleymankinik.spacetraveler.viewmodel.MainFragmentViewModel
@@ -21,6 +21,8 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainFragmentViewModel
     private lateinit var dao: Dao
+    var planetAdapter: PlanetAdapter? = null
+    var planetList = mutableListOf<Planet>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,13 +48,25 @@ class MainFragment : Fragment() {
             rvList.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             viewModel.planetList.observe(viewLifecycleOwner, Observer {
-                rvList.adapter = PlanetAdapter(it, itemClickTravelCallback = fun(id: Long) {
+                planetList.addAll(it)
+
+                planetAdapter = PlanetAdapter(planetList, itemClickTravelCallback = fun(id: Long) {
 
                 }, itemClickFavoriteCallback = fun(id: Long, favorite: Boolean) {
                     viewModel.updatePlanetFavorite(id, favorite)
                 })
+                rvList.adapter = planetAdapter
             })
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
 
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    planetAdapter?.filter?.filter(newText);
+                    return false
+                }
+            })
         }
     }
 

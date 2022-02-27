@@ -147,6 +147,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                app:iconifiedByDefault="false"
+                app:queryHint="@string/search"
                 android:background="@drawable/background_rectangle_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
