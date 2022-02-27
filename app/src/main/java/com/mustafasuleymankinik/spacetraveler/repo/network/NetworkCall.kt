@@ -10,13 +10,13 @@ import io.reactivex.schedulers.Schedulers
 class NetworkCall {
     companion object {
         fun getList(
-            observer: GenericObserver<Planet>
+            observer: GenericObserver<List<Planet>>
         ) {
             NetworkService.getApi().getList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : GenericObserver<Planet>() {
-                    override fun onNext(t: Planet) {
+                .subscribe(object : GenericObserver<List<Planet>>() {
+                    override fun onNext(t: List<Planet>) {
                         observer.onNext(t)
                     }
 
