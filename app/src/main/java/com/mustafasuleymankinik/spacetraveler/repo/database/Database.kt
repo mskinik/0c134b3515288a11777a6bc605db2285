@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.mustafasuleymankinik.spacetraveler.model.Planet
+import com.mustafasuleymankinik.spacetraveler.model.User
 
 /**
  * Created by mustafasuleymankinik on 27.02.2022.
  */
-@androidx.room.Database(entities = [Planet::class], version = 1)
+@androidx.room.Database(entities = [Planet::class,User::class], version = 1)
 abstract class Database : RoomDatabase() {
     abstract fun noteDao(): Dao
 

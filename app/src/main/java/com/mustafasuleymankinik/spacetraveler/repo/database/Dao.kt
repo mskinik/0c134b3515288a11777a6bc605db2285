@@ -25,4 +25,7 @@ interface Dao {
 
     @Query("SELECT * FROM table_planet WHERE favorite=1 ORDER BY id ASC ")
     fun getFavoritedList():List<Planet>
+
+    @Query("UPDATE table_user SET planet=:planet WHERE id=:id")
+    fun updateUser(id:Long,planet: Planet)
 }
