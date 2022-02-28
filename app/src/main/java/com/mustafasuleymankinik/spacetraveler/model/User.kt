@@ -1,5 +1,7 @@
 package com.mustafasuleymankinik.spacetraveler.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -10,19 +12,15 @@ import androidx.room.PrimaryKey
 data class User(
     @PrimaryKey(autoGenerate = false)
     var id: Long = 1,
-    var name: String?,
-    var ugs: Int?,
-    var eus: Int?,
-    var ds: Int?,
-    var planet: Planet = Planet(
-        id = 1L,
-        name = "Dünya",
-        coordinateX = 0.0,
-        coordinateY = 0.0,
-        capacity = 0,
-        stock = 0,
-        need = 0,
-        favorite = false,
-        eus = null
-    )
+    var name: String? = "Süleyman",
+    var ugs: Int? = 50000,
+    var eus: Int? = 100,
+    var ds: Int? = 50000,
+    @ColumnInfo(name = "ship_damage")
+    var shipDamage: Int? = 100,
+    var userPlanetName:String? = "Dünya",
+    @ColumnInfo(name = "user_coordinate_x")
+    var userCoordinateX: Double? = 0.0,
+    @ColumnInfo(name = "user_coordinate_y")
+    var userCoordinateY: Double? = 0.0,
 )

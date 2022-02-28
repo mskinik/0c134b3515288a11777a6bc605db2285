@@ -1,9 +1,19 @@
 <resources>
     <string name="app_name">SpaceTraveler</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="favorites">Favoriler</string>
-    <string name="travel">Travel</string>
+    <string name="travel">Yolculuk</string>
     <string name="station">İstasyon</string>
     <string name="search">search</string>
+    <string name="set_points">Dağıtılacak Puan:</string>
+    <string name="add_name">İsim Ekle</string>
+    <string name="continue_to_next">Devam Et</string>
+    <string name="ugs">UGS %s</string>
+    <string name="ds">DS %s</string>
+    <string name="eus">EUS %s</string>
+    <string name="second">%s sn</string>
+    <string name="value_eus">%sEUS</string>
+    <string name="distance_to_earth">Dünyaya Uzaklık: %s</string>
+    <string name="ship_damage">Gemi Gücü: %s</string>
+    <string name="travelled">Seyahat Edildi</string>
 </resources>

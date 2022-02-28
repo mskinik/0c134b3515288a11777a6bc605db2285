@@ -21,5 +21,6 @@ data class Planet(
     var stock: Int?,
     var need: Int?,
     var favorite:Boolean = false,
-    var eus:String?
+    var distanceToEarth:Double?,
+    var travelled:Boolean = false
 )
