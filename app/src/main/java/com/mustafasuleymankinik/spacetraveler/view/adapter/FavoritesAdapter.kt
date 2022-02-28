@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.mustafasuleymankinik.spacetraveler.R
 import com.mustafasuleymankinik.spacetraveler.databinding.LayoutFavoritesAdapterBinding
 import com.mustafasuleymankinik.spacetraveler.model.Planet
 
@@ -26,12 +27,14 @@ class FavoritesAdapter(val list: List<Planet>,val itemClickFavoriteCallback:((Lo
                 item.name?.let {
                     tvName.text = it
                 }
-                item.eus?.let {
-                    tvEus.text = it
+                item.distanceToEarth?.let {
+                    tvDistanceToEarth.text = context.getString(R.string.distance_to_earth,it.toInt().toString())
                 }
                 ivStar.setOnClickListener {
                     itemClickFavoriteCallback?.invoke(item.id,item.favorite)
                 }
+                if (item.travelled)
+                    tvTravelled.visibility = View.VISIBLE
             }
         }
     }

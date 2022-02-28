@@ -16,4 +16,5 @@
     <string name="distance_to_earth">Dünyaya Uzaklık: %s</string>
     <string name="ship_damage">Gemi Gücü: %s</string>
     <string name="travelled">Seyahat Edildi</string>
+    <string name="welcome_message">Geminin mazotu bitti Han Solo. Dünyaya hoş geldin.</string>
 </resources>

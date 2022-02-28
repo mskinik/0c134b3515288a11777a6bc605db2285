@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -45,16 +46,23 @@ class MainFragment : Fragment() {
         binding.apply {
             mainFrag = this@MainFragment
             mainViewModel = viewModel
+            viewModel.user.observe(viewLifecycleOwner, Observer {
+                user = it
+            })
             rvList.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             viewModel.planetList.observe(viewLifecycleOwner, Observer {
+                planetList.clear()
                 planetList.addAll(it)
 
-                planetAdapter = PlanetAdapter(planetList, itemClickTravelCallback = fun(id: Long) {
-
-                }, itemClickFavoriteCallback = fun(id: Long, favorite: Boolean) {
-                    viewModel.updatePlanetFavorite(id, favorite)
-                })
+                planetAdapter = PlanetAdapter(
+                    planetList,
+                    itemClickTravelCallback = fun(id: Long, planet: Planet) {
+                        travelClick(id, planet)
+                    },
+                    itemClickFavoriteCallback = fun(id: Long, favorite: Boolean) {
+                        viewModel.updatePlanetFavorite(id, favorite)
+                    })
                 rvList.adapter = planetAdapter
             })
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -67,6 +75,10 @@ class MainFragment : Fragment() {
                     return false
                 }
             })
+            viewModel.mappedUserLiveData.observe(viewLifecycleOwner, Observer {
+                if (it)
+                    clFinishHolder.visibility = View.VISIBLE
+            })
         }
     }
 
@@ -78,5 +90,9 @@ class MainFragment : Fragment() {
     fun rightClick() {
         val layoutManager = binding.rvList.layoutManager
         (layoutManager as LinearLayoutManager).scrollToPosition(layoutManager.findLastVisibleItemPosition() + 1)
+    }
+
+    fun travelClick(id: Long, planet: Planet) {
+        viewModel.travel(id, planet)
     }
 }

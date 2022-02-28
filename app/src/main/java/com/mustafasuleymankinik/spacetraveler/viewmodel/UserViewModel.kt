@@ -20,7 +20,4 @@ class UserViewModel(val app: Application) : AndroidViewModel(app) {
     val speed: LiveData<Int> = _speed
     private val _capacity = MutableLiveData<Int>()
     val capacity: LiveData<Int> get() = _capacity
-    //private val _totalLiveData: MediatorLiveData<Int> = MediatorLiveData<Int>.addSource(_capacity,_totalLiveDa)
-
-
 }

@@ -31,17 +31,31 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_eus"
+            android:id="@+id/tv_distance_to_earth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/dark_gray"
-            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@id/tv_name"
             app:layout_constraintStart_toStartOf="@id/tv_name"
             app:layout_constraintTop_toBottomOf="@id/tv_name" />
+        <TextView
+            android:id="@+id/tv_travelled"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_distance_to_earth"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:text="@string/travelled"
+            android:textColor="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/tv_distance_to_earth"
+            app:layout_constraintEnd_toEndOf="@id/tv_distance_to_earth"/>
+
+
 
         <ImageView
             android:id="@+id/iv_star"
