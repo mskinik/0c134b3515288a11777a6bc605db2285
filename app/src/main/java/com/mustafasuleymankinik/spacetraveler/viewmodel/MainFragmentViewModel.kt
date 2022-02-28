@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.mustafasuleymankinik.spacetraveler.model.Planet
 import com.mustafasuleymankinik.spacetraveler.model.User
@@ -20,7 +21,11 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
     var dao: Dao = Database.getInstance(app).noteDao()
     val planetList: LiveData<List<Planet>> = dao.getPlanetList()
     val user: LiveData<User> = dao.getUser()
-    val mappedUserLiveData = Transformations.map(user) { usr->
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+    val mappedUserLiveData = Transformations.map(user) { usr ->
         val shipDamage = usr.shipDamage
         val ugs = usr.ugs
         val ds = usr.ds
@@ -31,21 +36,21 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
             user.value?.name = "Han Solo"
             user.value?.userPlanetName = "Dünya"
             return@map true
-        } else if (shipDamage <= 0 || ugs <= 0 || ds <= 0 || eus <= 0){
-                user.value?.userCoordinateY = 0.0
-                user.value?.userCoordinateX = 0.0
-                user.value?.name = "Han Solo"
-                user.value?.userPlanetName = "Dünya"
-                return@map true
-            }
-            else
-                return@map false
+        } else if (shipDamage <= 0 || ugs <= 0 || ds <= 0 || eus <= 0) {
+            user.value?.userCoordinateY = 0.0
+            user.value?.userCoordinateX = 0.0
+            user.value?.name = "Han Solo"
+            user.value?.userPlanetName = "Dünya"
+            return@map true
+        } else
+            return@map false
 
     }
 
     init {
         dao.addUser(User())
         //val list = dao.getPlanetList()
+        _isLoading.value = true
         if (planetList.value.isNullOrEmpty()) {
             NetworkCall.getList(object : GenericObserver<List<Planet>>() {
                 override fun onNext(t: List<Planet>) {
@@ -54,18 +59,15 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
                             calculateToEarth(planet.coordinateX, planet.coordinateY)
                         val a = dao.addPlanet(planet)
                     }
-                    // _planetList.value = dao.getPlanetList()
+                    _isLoading.value = false
                 }
 
                 override fun onError(e: Throwable) {
-                    // Do nothing for now
+                    _isLoading.value = false
                 }
             })
-        } /*else {
-            list.let {
-                _planetList.value = it
-            }
-        } */
+        } else
+            _isLoading.value = false
     }
 
     private fun calculateToEarth(coordinateX: Double?, coordinateY: Double?): Double? {
@@ -79,11 +81,14 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
     }
 
     fun updatePlanetFavorite(id: Long, favorite: Boolean) {
+        _isLoading.value = true
         dao.updateFavorite(id, !favorite)
+        _isLoading.value = false
         // _planetList.value = dao.getPlanetList()
     }
 
     fun travel(id: Long, planet: Planet) {
+        _isLoading.value = true
         var finalUserUgs: Int? = null
         var azalacakEus: Int? = null
         var finalUserEus: Int? = null
@@ -143,5 +148,6 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
             }
 
         }
+        _isLoading.value = false
     }
 }

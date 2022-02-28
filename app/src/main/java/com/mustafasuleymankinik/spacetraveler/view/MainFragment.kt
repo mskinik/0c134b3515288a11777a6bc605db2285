@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mustafasuleymankinik.spacetraveler.base.BaseFragment
 import com.mustafasuleymankinik.spacetraveler.databinding.FragmentMainBinding
 import com.mustafasuleymankinik.spacetraveler.model.Planet
 import com.mustafasuleymankinik.spacetraveler.repo.database.Dao
@@ -18,10 +19,9 @@ import com.mustafasuleymankinik.spacetraveler.view.adapter.PlanetAdapter
 import com.mustafasuleymankinik.spacetraveler.viewmodel.MainFragmentViewModel
 
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainFragmentViewModel
-    private lateinit var dao: Dao
     var planetAdapter: PlanetAdapter? = null
     var planetList = mutableListOf<Planet>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +80,12 @@ class MainFragment : Fragment() {
                     clFinishHolder.visibility = View.VISIBLE
             })
         }
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            if (it)
+                showLoading()
+            else
+                hideLoading()
+        })
     }
 
     fun leftClick() {

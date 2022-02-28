@@ -9,11 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mustafasuleymankinik.spacetraveler.R
+import com.mustafasuleymankinik.spacetraveler.base.BaseFragment
 import com.mustafasuleymankinik.spacetraveler.databinding.FragmentFavoritesBinding
 import com.mustafasuleymankinik.spacetraveler.view.adapter.FavoritesAdapter
 import com.mustafasuleymankinik.spacetraveler.viewmodel.FavoritesViewModel
 
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : BaseFragment() {
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var viewModel: FavoritesViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +45,12 @@ class FavoritesFragment : Fragment() {
             })
 
         }
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            if (it)
+                showLoading()
+            else
+                hideLoading()
+        })
     }
 
 }

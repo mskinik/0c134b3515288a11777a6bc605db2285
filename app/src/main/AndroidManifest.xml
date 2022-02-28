@@ -12,8 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpaceTraveler">
         <activity
-            android:name=".view.UserActivity"
+            android:name=".base.BaseActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.UserActivity"
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".view.MainActivity"
             android:exported="true">
