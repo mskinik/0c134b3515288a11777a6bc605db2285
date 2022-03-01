@@ -35,6 +35,10 @@ class FavoritesAdapter(val list: List<Planet>,val itemClickFavoriteCallback:((Lo
                 }
                 if (item.travelled)
                     tvTravelled.visibility = View.VISIBLE
+                else
+                    tvTravelled.visibility = View.GONE
+                if (item.capacity != null && item.stock != null)
+                    tvStock.text = "${item.capacity}/${item.stock}"
             }
         }
     }

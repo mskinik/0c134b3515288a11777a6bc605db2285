@@ -29,7 +29,7 @@ interface Dao {
     fun addPlanet(planet: Planet): Long
 
     @Query("SELECT * FROM table_planet WHERE favorite=1 ORDER BY id ASC ")
-    fun getFavoritedList(): List<Planet>
+    fun getFavoritedList(): LiveData<List<Planet>>
 
     @Insert
     fun addUser(user: User):Long

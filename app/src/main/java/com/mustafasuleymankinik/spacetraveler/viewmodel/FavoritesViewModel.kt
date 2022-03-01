@@ -14,26 +14,14 @@ import com.mustafasuleymankinik.spacetraveler.repo.database.Database
 class FavoritesViewModel(val app:Application):AndroidViewModel(app) {
     var dao:Dao = Database.getInstance(app).noteDao()
 
-    private val _favoriteLiveData = MutableLiveData<List<Planet>>()
-    val favoriteLiveData:LiveData<List<Planet>> get() = _favoriteLiveData
+    val favoriteLiveData:LiveData<List<Planet>> = dao.getFavoritedList()
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
-    init {
-        getList()
-    }
-
     fun updateFavorite(id:Long,favorite:Boolean){
         _isLoading.value = true
         dao.updateFavorite(id,!favorite)
-        getList()
         _isLoading.value = false
-    }
-    fun getList(){
-        _isLoading.value = true
-        _favoriteLiveData.value = dao.getFavoritedList()
-        _isLoading.value = false
-
     }
 }
