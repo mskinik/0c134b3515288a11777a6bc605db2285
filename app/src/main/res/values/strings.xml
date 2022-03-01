@@ -17,4 +17,7 @@
     <string name="ship_damage">Gemi Gücü: %s</string>
     <string name="travelled">Seyahat Edildi</string>
     <string name="welcome_message">Geminin mazotu bitti Han Solo. Dünyaya hoş geldin.</string>
+    <string name="add_speed">Hızı Ekle</string>
+    <string name="add_capacity">Kapasite Ekle</string>
+    <string name="add_durability">Dayanıklılık Ekle</string>
 </resources>

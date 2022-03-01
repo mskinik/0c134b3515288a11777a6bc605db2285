@@ -33,6 +33,9 @@ interface Dao {
 
     @Insert
     fun addUser(user: User):Long
+
+    @Query("SELECT id FROM table_user WHERE id=:id")
+    fun getUserForCheck(id:Long):Long
     @Update
     fun updateUser(user: User):Int
 

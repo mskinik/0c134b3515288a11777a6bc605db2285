@@ -48,8 +48,6 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
     }
 
     init {
-        dao.addUser(User())
-        //val list = dao.getPlanetList()
         _isLoading.value = true
         if (planetList.value.isNullOrEmpty()) {
             NetworkCall.getList(object : GenericObserver<List<Planet>>() {
@@ -84,7 +82,6 @@ class MainFragmentViewModel(val app: Application) : AndroidViewModel(app) {
         _isLoading.value = true
         dao.updateFavorite(id, !favorite)
         _isLoading.value = false
-        // _planetList.value = dao.getPlanetList()
     }
 
     fun travel(id: Long, planet: Planet) {

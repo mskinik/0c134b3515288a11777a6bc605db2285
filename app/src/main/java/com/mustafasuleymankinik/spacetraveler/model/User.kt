@@ -12,12 +12,12 @@ import androidx.room.PrimaryKey
 data class User(
     @PrimaryKey(autoGenerate = false)
     var id: Long = 1,
-    var name: String? = "Kınık",
-    var ugs: Int? = 11050,
-    var eus: Int? = 10000,
-    var ds: Int? = 50000,
+    var name: String?,
+    var ugs: Int? ,
+    var eus: Int? ,
+    var ds: Int? ,
     @ColumnInfo(name = "ship_damage")
-    var shipDamage: Int? = 60,
+    var shipDamage: Int? = 100,
     var userPlanetName:String? = "Dünya",
     @ColumnInfo(name = "user_coordinate_x")
     var userCoordinateX: Double? = 0.0,
