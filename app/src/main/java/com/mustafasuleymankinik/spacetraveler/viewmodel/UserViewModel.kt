@@ -27,6 +27,9 @@ class UserViewModel(val app: Application) : AndroidViewModel(app) {
     val _success = MutableLiveData<Boolean>()
     val success:LiveData<Boolean> get() = _success
 
+    private val _error = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> get() = _error
+
     init {
         if (dao.getUserForCheck(1) == 1L)
             _success.value = true
@@ -37,7 +40,6 @@ class UserViewModel(val app: Application) : AndroidViewModel(app) {
         val durability = _durability.value
         val capability = _capacity.value
         if (!speed.isNullOrEmpty() && !durability.isNullOrEmpty() && !capability.isNullOrEmpty()) {
-
             if (speed.toInt() in 1..13 && capability.toInt() in 1..13 && durability.toInt() in 1..13) {
                 if (speed.toInt() + capability.toInt() + durability.toInt() == 15) {
                     if (!name.value.isNullOrEmpty()) {
@@ -52,8 +54,15 @@ class UserViewModel(val app: Application) : AndroidViewModel(app) {
                         if (value == 1L)
                             _success.value = true
                     }
+                   else
+                        _error.value = true
                 }
+                else
+                    _error.value = true
             }
+            else
+                _error.value = true
         }
     }
+
 }

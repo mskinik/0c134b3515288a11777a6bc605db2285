@@ -29,11 +29,11 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun showError(
-        errorTitle: String? = "Beklenmedik Hata!",
-        errorMessage: String? = "Beklenmedik bir hata ile karşılaşıldı."
+        errorTitle: String? = "Kesinlikle Hiç Beklenmedik Bir Hata!",
+        errorMessage: String? = "Bende beklemiyordum ama olsun, girdiğin değerleri kontrol etsen iyi olur"
     ) {
         val builder = AlertDialog.Builder(this)
-            .setTitle(title)
+            .setTitle(errorTitle)
             .setMessage(errorMessage)
             .setPositiveButton("Kapat", null)
             .setCancelable(false)
